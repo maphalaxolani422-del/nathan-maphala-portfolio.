@@ -1,0 +1,1578 @@
+ html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nathan Maphala — Video Editor &amp; Content Strategist</title>
+<meta name="description" content="Nathan Maphala — Video Editor, Copywriter &amp; Content Strategist. Professional content that attracts attention, builds trust, and generates leads."/>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* ─── TOKENS ─── */
+:root{
+  --ink:     #06090f;
+  --ink2:    #0c1120;
+  --panel:   #111826;
+  --panel2:  #172034;
+  --rim:     rgba(255,255,255,0.07);
+  --rim2:    rgba(99,179,237,0.3);
+  --gold:    #f59e0b;
+  --gold2:   #fbbf24;
+  --sky:     #38bdf8;
+  --sky2:    #7dd3fc;
+  --slate:   #94a3b8;
+  --fog:     #64748b;
+  --snow:    #f1f5f9;
+  --ff:      'Outfit', sans-serif;
+  --mono:    'Space Mono', monospace;
+  --ease:    cubic-bezier(0.16,1,0.3,1);
+  --glow:    0 0 80px rgba(56,189,248,0.12);
+  --glow2:   0 0 80px rgba(245,158,11,0.12);
+}
+
+/* ─── RESET ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{
+  background:var(--ink);color:var(--snow);
+  font-family:var(--ff);line-height:1.7;
+  overflow-x:hidden;cursor:none;
+}
+a{text-decoration:none;color:inherit;}
+p{color:var(--slate);}
+h1,h2,h3{font-family:var(--ff);line-height:1.05;}
+h1{font-size:clamp(3rem,7vw,6.2rem);font-weight:900;letter-spacing:-0.03em;}
+h2{font-size:clamp(1.9rem,4.5vw,3.6rem);font-weight:800;letter-spacing:-0.02em;}
+h3{font-size:1.1rem;font-weight:700;color:var(--snow);}
+img{display:block;max-width:100%;}
+.container{max-width:1160px;margin:0 auto;padding:0 28px;}
+section{padding:120px 0;}
+
+/* ─── CURSOR ─── */
+#cur{
+  position:fixed;width:10px;height:10px;
+  background:var(--sky);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:width .25s,height .25s,background .25s;
+}
+#cur-ring{
+  position:fixed;width:34px;height:34px;
+  border:1px solid rgba(56,189,248,0.45);
+  border-radius:50%;pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:width .3s,height .3s,border-color .3s;
+}
+#cur.big{width:18px;height:18px;background:var(--gold);}
+#cur-ring.big{width:56px;height:56px;border-color:rgba(245,158,11,0.4);}
+
+/* ─── NOISE OVERLAY ─── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23f)' opacity='.04'/%3E%3C/svg%3E");
+  opacity:.55;
+}
+
+/* ─── CHIP / TAG ─── */
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:.68rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 14px;border-radius:100px;
+  margin-bottom:20px;
+}
+.chip-sky{color:var(--sky);background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.25);}
+.chip-gold{color:var(--gold);background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);}
+.chip-slate{color:var(--slate);background:rgba(148,163,184,.08);border:1px solid rgba(148,163,184,.18);}
+
+/* ─── GRADIENT TEXT ─── */
+.g-sky{
+  background:linear-gradient(120deg,var(--sky) 0%,var(--sky2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.g-gold{
+  background:linear-gradient(120deg,var(--gold) 0%,var(--gold2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* ─── BUTTONS ─── */
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:14px 32px;border-radius:100px;
+  font-family:var(--ff);font-weight:700;font-size:.9rem;
+  letter-spacing:.01em;cursor:none;
+  border:none;transition:all .28s var(--ease);
+}
+.btn-sky{
+  background:var(--sky);color:var(--ink);
+  box-shadow:0 0 40px rgba(56,189,248,.28);
+}
+.btn-sky:hover{transform:translateY(-2px);box-shadow:0 0 60px rgba(56,189,248,.5);}
+.btn-gold{
+  background:var(--gold);color:var(--ink);
+  box-shadow:0 0 40px rgba(245,158,11,.28);
+}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 0 60px rgba(245,158,11,.5);}
+.btn-ghost{background:transparent;color:var(--snow);border:1px solid var(--rim);}
+.btn-ghost:hover{border-color:rgba(56,189,248,.4);color:var(--sky);}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:18px 0;
+  background:rgba(6,9,15,.72);
+  backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
+  border-bottom:1px solid var(--rim);
+  transition:background .3s;
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.nav-brand{display:flex;flex-direction:column;line-height:1;}
+.nav-name{font-family:var(--ff);font-weight:900;font-size:1.1rem;color:var(--snow);letter-spacing:-.02em;}
+.nav-role{font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--sky);margin-top:3px;}
+.nav-links{display:flex;gap:34px;list-style:none;}
+.nav-links a{
+  color:var(--fog);font-size:.87rem;font-weight:500;
+  position:relative;transition:color .2s;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;right:0;
+  height:1px;background:var(--sky);
+  transform:scaleX(0);transform-origin:left;transition:transform .3s;
+}
+.nav-links a:hover{color:var(--snow);}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-cta{display:flex;align-items:center;gap:10px;}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:none;background:none;border:none;padding:4px;}
+.hbg span{display:block;width:22px;height:2px;background:var(--snow);border-radius:2px;transition:all .3s;}
+
+/* ─── MOBILE MENU ─── */
+.mob-menu{
+  display:none;position:fixed;inset:0;
+  background:var(--ink);z-index:300;
+  flex-direction:column;align-items:center;justify-content:center;gap:30px;
+}
+.mob-menu.open{display:flex;}
+.mob-menu a{font-size:1.9rem;font-weight:800;color:var(--snow);transition:color .2s;}
+.mob-menu a:hover{color:var(--sky);}
+.mob-close{position:absolute;top:22px;right:26px;background:none;border:none;color:var(--snow);font-size:1.5rem;cursor:none;}
+
+/* ─── HERO ─── */
+#hero{
+  min-height:100vh;display:flex;align-items:center;
+  position:relative;overflow:hidden;padding-top:90px;
+}
+/* layered aurora */
+.aurora{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 60% at 80% 30%,rgba(56,189,248,.07) 0%,transparent 65%),
+    radial-gradient(ellipse 55% 50% at 10% 75%,rgba(245,158,11,.05) 0%,transparent 65%),
+    radial-gradient(ellipse 40% 45% at 55% 100%,rgba(56,189,248,.04) 0%,transparent 65%);
+}
+/* grid */
+.grid-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 90% 90% at 50% 50%,black 0%,transparent 100%);
+}
+.hero-body{position:relative;z-index:2;max-width:860px;}
+.avail-row{display:flex;align-items:center;gap:10px;margin-bottom:28px;animation:rise .9s var(--ease) both;}
+.avail-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px #22c55e;animation:blink 2.2s infinite;}
+.avail-txt{font-family:var(--mono);font-size:.76rem;color:#22c55e;letter-spacing:.06em;}
+.hero-body h1{margin-bottom:26px;animation:rise .9s .08s var(--ease) both;}
+.hero-lead{
+  font-size:1.13rem;color:var(--slate);max-width:580px;
+  margin-bottom:38px;animation:rise .9s .18s var(--ease) both;
+  font-weight:400;line-height:1.8;
+}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;animation:rise .9s .28s var(--ease) both;}
+.hero-numbers{
+  display:flex;gap:52px;margin-top:72px;padding-top:44px;
+  border-top:1px solid var(--rim);flex-wrap:wrap;
+  animation:rise .9s .38s var(--ease) both;
+}
+.h-num-val{font-family:var(--ff);font-size:2rem;font-weight:900;line-height:1;}
+.h-num-lab{font-family:var(--mono);font-size:.68rem;color:var(--fog);letter-spacing:.1em;text-transform:uppercase;margin-top:6px;}
+
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{box-shadow:0 0 6px #22c55e}50%{box-shadow:0 0 20px #22c55e}}
+
+/* ─── SECTION HEADER SHARED ─── */
+.sec-head{text-align:center;margin-bottom:64px;}
+.sec-head h2{margin-bottom:14px;}
+.sec-head p{max-width:540px;margin:0 auto;font-size:1rem;}
+
+/* ─── PORTFOLIO ─── */
+#portfolio{background:var(--ink2);}
+
+/* main showreel */
+.reel-frame{
+  position:relative;border-radius:22px;overflow:hidden;
+  background:var(--panel);border:1px solid var(--rim2);
+  box-shadow:var(--glow);margin-bottom:56px;
+}
+.reel-label{
+  display:flex;align-items:center;gap:10px;
+  padding:18px 24px;border-bottom:1px solid var(--rim);
+  background:rgba(56,189,248,.04);
+}
+.reel-dot{width:10px;height:10px;border-radius:50%;background:var(--sky);box-shadow:0 0 12px var(--sky);}
+.reel-title-txt{font-family:var(--mono);font-size:.72rem;color:var(--sky);letter-spacing:.14em;text-transform:uppercase;}
+.reel-badge{
+  margin-left:auto;
+  font-family:var(--mono);font-size:.62rem;
+  text-transform:uppercase;letter-spacing:.1em;
+  padding:3px 10px;border-radius:4px;
+  background:rgba(245,158,11,.12);color:var(--gold);
+  border:1px solid rgba(245,158,11,.3);
+}
+/* filmstrip top/bottom */
+.film{
+  position:absolute;left:0;right:0;height:36px;
+  background:repeating-linear-gradient(90deg,rgba(0,0,0,.7) 0,rgba(0,0,0,.7) 22px,transparent 22px,transparent 32px);
+  z-index:3;pointer-events:none;
+}
+.film-top{top:58px;}
+.film-bot{bottom:0;}
+/* vid container */
+.vid-box{position:relative;aspect-ratio:16/9;background:var(--panel2);}
+.vid-box iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
+
+/* portfolio 3-col grid */
+.port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.port-card{
+  background:var(--panel);border:1px solid var(--rim);
+  border-radius:18px;overflow:hidden;
+  transition:transform .32s var(--ease),border-color .3s,box-shadow .3s;
+  cursor:none;
+}
+.port-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(56,189,248,.35);
+  box-shadow:0 24px 60px rgba(0,0,0,.45),var(--glow);
+}
+/* label bar above iframe */
+.port-label{
+  display:flex;align-items:center;gap:8px;
+  padding:12px 16px;border-bottom:1px solid var(--rim);
+}
+.port-label-dot{width:7px;height:7px;border-radius:50%;}
+.port-label-txt{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fog);}
+.c-sky{background:var(--sky);}
+.c-gold{background:var(--gold);}
+.c-grn{background:#22c55e;}
+/* aspect box for each grid video */
+.port-vid{position:relative;aspect-ratio:16/9;background:var(--ink);}
+.port-vid iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
+.port-meta{padding:18px;}
+.port-cat{font-family:var(--mono);font-size:.64rem;text-transform:uppercase;letter-spacing:.12em;color:var(--sky);margin-bottom:6px;}
+.port-ttl{font-size:.97rem;font-weight:700;color:var(--snow);margin-bottom:5px;}
+.port-desc{font-size:.83rem;color:var(--fog);line-height:1.55;}
+
+/* construction card special border */
+.port-card.construction{border-color:rgba(245,158,11,.2);}
+.port-card.construction:hover{border-color:rgba(245,158,11,.5);box-shadow:0 24px 60px rgba(0,0,0,.45),var(--glow2);}
+
+/* ─── ABOUT / SERVICES ─── */
+#services{background:var(--ink);}
+.services-2col{
+  display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;
+  margin-bottom:88px;
+}
+.s2-text h2{margin-bottom:18px;}
+.s2-text p{font-size:.97rem;margin-bottom:14px;}
+.s2-graphic{
+  position:relative;border-radius:20px;overflow:hidden;
+  background:var(--panel);border:1px solid rgba(56,189,248,.2);
+  padding:36px;min-height:320px;display:flex;flex-direction:column;justify-content:space-between;
+}
+.s2-code{
+  font-family:var(--mono);font-size:.78rem;color:var(--sky);
+  line-height:2.1;opacity:.8;
+}
+.s2-result{
+  background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.2);
+  border-radius:12px;padding:18px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.s2r-label{font-family:var(--mono);font-size:.64rem;text-transform:uppercase;letter-spacing:.12em;color:var(--fog);}
+.s2r-val{font-size:1.5rem;font-weight:900;}
+
+/* services 3-col grid */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.svc-card{
+  background:var(--panel);border:1px solid var(--rim);
+  border-radius:16px;padding:30px 24px;
+  position:relative;overflow:hidden;
+  transition:transform .3s var(--ease),border-color .3s,box-shadow .3s;
+  cursor:none;
+}
+.svc-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(56,189,248,.05),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.svc-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(56,189,248,.3);
+  box-shadow:0 20px 50px rgba(0,0,0,.35),var(--glow);
+}
+.svc-card:hover::before{opacity:1;}
+.svc-icon{
+  width:50px;height:50px;border-radius:13px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;margin-bottom:18px;
+}
+.ic-sky{background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.22);}
+.ic-gold{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.22);}
+.ic-grn{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.22);}
+.svc-card h3{font-size:1rem;margin-bottom:10px;}
+.svc-card p{font-size:.86rem;line-height:1.7;}
+.svc-list{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:6px;}
+.svc-list li{
+  display:flex;align-items:center;gap:8px;
+  font-size:.82rem;color:var(--slate);
+}
+.svc-list li::before{
+  content:'';width:5px;height:5px;border-radius:50%;
+  background:var(--sky);flex-shrink:0;
+}
+
+/* ─── WHY / RESULTS ─── */
+#results{background:var(--ink2);}
+.results-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:56px;}
+.res-card{
+  background:var(--panel);border:1px solid var(--rim);
+  border-radius:16px;padding:30px;
+  position:relative;overflow:hidden;
+  transition:transform .3s var(--ease),border-color .3s;
+  cursor:none;
+}
+.res-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--sky),var(--gold));
+  transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);
+}
+.res-card:hover::after{transform:scaleX(1);}
+.res-card:hover{transform:translateY(-4px);border-color:rgba(56,189,248,.22);}
+.res-big{font-size:2.8rem;font-weight:900;line-height:1;margin-bottom:8px;}
+.res-lbl{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--fog);margin-bottom:14px;}
+.res-card h3{font-size:.95rem;margin-bottom:7px;}
+.res-card p{font-size:.83rem;}
+
+/* process steps */
+.steps{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--rim);border-radius:16px;overflow:hidden;
+}
+.step{
+  background:var(--panel);padding:30px 22px;text-align:center;
+  transition:background .3s;
+}
+.step:hover{background:var(--panel2);}
+.step-num{font-family:var(--mono);font-size:.68rem;color:var(--sky);letter-spacing:.12em;margin-bottom:12px;}
+.step h3{font-size:.92rem;margin-bottom:8px;}
+.step p{font-size:.8rem;}
+
+/* ─── FAQ ─── */
+#faq{background:var(--ink);}
+.faq-2col{display:grid;grid-template-columns:1fr 1.35fr;gap:80px;align-items:start;}
+.faq-left h2{margin-bottom:16px;}
+.faq-left p{font-size:.97rem;margin-bottom:30px;}
+.faq-list{display:flex;flex-direction:column;gap:10px;}
+.faq-item{
+  background:var(--panel);border:1px solid var(--rim);
+  border-radius:12px;overflow:hidden;transition:border-color .3s;cursor:none;
+}
+.faq-item.open{border-color:rgba(56,189,248,.38);}
+.faq-q{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 20px;cursor:none;
+  font-weight:600;font-size:.9rem;color:var(--snow);
+  gap:12px;user-select:none;
+}
+.faq-ic{
+  width:24px;height:24px;border-radius:50%;
+  border:1px solid var(--rim);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:.68rem;color:var(--fog);
+  transition:transform .3s,border-color .3s,color .3s,background .3s;
+}
+.faq-item.open .faq-ic{
+  transform:rotate(180deg);border-color:var(--sky);
+  color:var(--sky);background:rgba(56,189,248,.1);
+}
+.faq-ans{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.faq-ans.open{max-height:280px;}
+.faq-ans p{padding:0 20px 18px;font-size:.88rem;line-height:1.75;}
+
+/* ─── CONTACT ─── */
+#contact{
+  background:var(--ink2);position:relative;overflow:hidden;
+}
+.contact-glow{
+  position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 55% 70% at 75% 50%,rgba(56,189,248,.05) 0%,transparent 60%);
+}
+.contact-2col{
+  display:grid;grid-template-columns:1fr 1fr;gap:72px;
+  align-items:center;position:relative;z-index:2;
+}
+.contact-left h2{margin-bottom:18px;}
+.contact-left>p{font-size:.97rem;margin-bottom:34px;}
+.cinfo-list{display:flex;flex-direction:column;gap:14px;margin-bottom:34px;}
+.cinfo{
+  display:flex;align-items:center;gap:14px;
+  padding:15px 18px;
+  background:var(--panel);border:1px solid var(--rim);
+  border-radius:12px;transition:border-color .3s;
+}
+.cinfo:hover{border-color:rgba(56,189,248,.3);}
+.cinfo-icon{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;
+}
+.ic-call{background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);}
+.ic-wa{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);}
+.ic-mail{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);}
+.cinfo-lbl{font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--fog);margin-bottom:2px;}
+.cinfo-val{font-size:.9rem;font-weight:700;color:var(--snow);}
+.cinfo-val a{color:var(--snow);transition:color .2s;}
+.cinfo-val a:hover{color:var(--sky);}
+/* form */
+.cform{
+  background:var(--panel);border:1px solid var(--rim);
+  border-radius:22px;padding:40px;
+}
+.cform-title{font-size:1.15rem;font-weight:800;color:var(--snow);margin-bottom:24px;}
+.fg{margin-bottom:15px;}
+.fg label{
+  display:block;font-family:var(--mono);font-size:.64rem;
+  text-transform:uppercase;letter-spacing:.1em;
+  color:var(--fog);margin-bottom:5px;
+}
+.fg input,.fg textarea,.fg select{
+  width:100%;background:var(--ink);
+  border:1px solid var(--rim);border-radius:8px;
+  padding:12px 14px;color:var(--snow);
+  font-family:var(--ff);font-size:.9rem;
+  transition:border-color .3s,box-shadow .3s;outline:none;cursor:none;
+}
+.fg input:focus,.fg textarea:focus,.fg select:focus{
+  border-color:rgba(56,189,248,.5);
+  box-shadow:0 0 0 3px rgba(56,189,248,.07);
+}
+.fg textarea{resize:vertical;min-height:95px;}
+.fg select option{background:var(--ink);}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+
+/* ─── FOOTER ─── */
+footer{
+  background:var(--panel);
+  border-top:1px solid var(--rim);
+  padding:52px 0 28px;
+}
+.foot-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:20px;
+}
+.foot-brand{display:flex;flex-direction:column;gap:5px;}
+.foot-name{font-weight:900;font-size:1.05rem;color:var(--snow);}
+.foot-role{font-family:var(--mono);font-size:.6rem;color:var(--fog);letter-spacing:.12em;text-transform:uppercase;}
+.soc-row{display:flex;gap:9px;}
+.soc{
+  width:40px;height:40px;border-radius:10px;
+  border:1px solid var(--rim);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;color:var(--slate);
+  transition:all .25s;cursor:none;background:transparent;
+}
+.soc:hover{border-color:rgba(56,189,248,.45);color:var(--sky);background:rgba(56,189,248,.07);}
+.foot-copy{font-family:var(--mono);font-size:.7rem;color:var(--fog);letter-spacing:.05em;}
+
+/* ─── REVEAL ANIMATION ─── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* ─── TESTIMONIALS ─── */
+#testimonials{background:var(--ink);}
+
+/* phone mockups row */
+.phones-row{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:32px;margin-bottom:72px;
+  justify-items:center;
+}
+.phone-wrap{
+  width:100%;max-width:380px;
+  border-radius:44px;
+  background:#0b1015;
+  border:2px solid rgba(255,255,255,0.1);
+  box-shadow:0 0 0 1px rgba(255,255,255,0.04),0 32px 80px rgba(0,0,0,0.7),inset 0 1px 0 rgba(255,255,255,0.06);
+  overflow:hidden;
+  position:relative;
+}
+/* notch */
+.phone-notch{
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:110px;height:28px;
+  background:#0b1015;
+  border-radius:0 0 22px 22px;
+  z-index:10;
+}
+/* status bar */
+.phone-status{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 22px 4px;
+  font-family:var(--mono);font-size:.62rem;color:rgba(255,255,255,.75);
+  background:#0b1015;
+}
+.pst-icons{display:flex;align-items:center;gap:5px;font-size:.7rem;}
+/* WhatsApp header */
+.wa-header{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px 10px;
+  background:#1f2c34;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.wa-back{color:rgba(255,255,255,.6);font-size:1rem;margin-right:2px;}
+.wa-avatar{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;font-weight:800;color:#fff;
+  flex-shrink:0;
+}
+.av-orange{background:linear-gradient(135deg,#f59e0b,#d97706);}
+.av-white{background:linear-gradient(135deg,#e2e8f0,#94a3b8);color:#1f2c34;}
+.wa-hinfo{flex:1;}
+.wa-hname{font-size:.82rem;font-weight:700;color:#fff;line-height:1.2;}
+.wa-hstatus{font-size:.65rem;color:#25d366;font-family:var(--mono);}
+.wa-icons{display:flex;gap:14px;color:rgba(255,255,255,.55);font-size:.9rem;}
+/* chat body */
+.wa-body{
+  padding:10px 10px 4px;
+  background:#0b1422;
+  min-height:360px;
+  display:flex;flex-direction:column;gap:4px;
+  font-size:.78rem;
+  /* WhatsApp background pattern */
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='10' cy='10' r='1.5' fill='rgba(255,255,255,0.025)'/%3E%3Ccircle cx='40' cy='25' r='1' fill='rgba(255,255,255,0.02)'/%3E%3Ccircle cx='20' cy='45' r='1.5' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
+}
+.wa-date{
+  align-self:center;
+  background:rgba(0,0,0,0.35);
+  color:rgba(255,255,255,.55);
+  font-family:var(--mono);font-size:.58rem;
+  padding:3px 10px;border-radius:8px;
+  margin:6px 0;letter-spacing:.04em;
+}
+/* sent bubble (green, right) */
+.wa-sent{
+  align-self:flex-end;
+  background:#005c4b;
+  color:#e9edef;
+  border-radius:10px 10px 2px 10px;
+  padding:7px 10px 5px;
+  max-width:80%;
+  position:relative;
+  line-height:1.45;
+}
+/* received bubble (dark, left) */
+.wa-recv{
+  align-self:flex-start;
+  background:#202c33;
+  color:#e9edef;
+  border-radius:10px 10px 10px 2px;
+  padding:7px 10px 5px;
+  max-width:82%;
+  line-height:1.45;
+}
+.wa-meta{
+  display:flex;align-items:center;justify-content:flex-end;
+  gap:4px;margin-top:3px;
+}
+.wa-t{font-family:var(--mono);font-size:.55rem;color:rgba(255,255,255,.4);}
+.wa-ticks{font-size:.72rem;color:#53bdeb;}
+.wa-ticks.grey{color:rgba(255,255,255,.4);}
+/* media bubble */
+.wa-media{
+  align-self:flex-end;
+  background:#005c4b;
+  border-radius:10px 10px 2px 10px;
+  overflow:hidden;max-width:80%;
+}
+.wa-media-inner{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 10px;
+}
+.wa-media-thumb{
+  width:44px;height:44px;border-radius:6px;
+  background:linear-gradient(135deg,#374151,#1f2937);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;flex-shrink:0;
+  border:1px solid rgba(255,255,255,.12);
+}
+.wa-media-info{flex:1;}
+.wa-media-name{font-size:.72rem;font-weight:700;color:#fff;line-height:1.3;}
+.wa-media-size{font-family:var(--mono);font-size:.58rem;color:rgba(255,255,255,.45);margin-top:2px;}
+/* input bar */
+.wa-input{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 10px;background:#1f2c34;
+}
+.wa-input-box{
+  flex:1;background:#2a3942;border-radius:22px;
+  padding:8px 14px;font-size:.73rem;color:rgba(255,255,255,.35);
+  border:none;
+}
+.wa-mic{
+  width:38px;height:38px;border-radius:50%;
+  background:#00a884;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;flex-shrink:0;
+}
+
+/* verified badge strip */
+.verified-strip{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px 20px;
+  background:rgba(37,211,102,.06);
+  border:1px solid rgba(37,211,102,.2);
+  border-radius:12px;
+  margin-bottom:64px;
+}
+.vs-icon{font-size:1.2rem;}
+.vs-text{font-family:var(--mono);font-size:.72rem;color:#25d366;letter-spacing:.08em;text-transform:uppercase;}
+
+/* classic quote cards */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.testi-card{
+  background:var(--panel);border:1px solid var(--rim);
+  border-radius:18px;padding:28px 24px;
+  position:relative;overflow:hidden;
+  transition:transform .3s var(--ease),border-color .3s,box-shadow .3s;
+  cursor:none;
+  display:flex;flex-direction:column;gap:16px;
+}
+.testi-card::before{
+  content:'\201C';
+  position:absolute;top:-10px;right:18px;
+  font-size:7rem;font-family:Georgia,serif;
+  color:rgba(56,189,248,.06);line-height:1;
+  pointer-events:none;
+}
+.testi-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(56,189,248,.28);
+  box-shadow:0 24px 60px rgba(0,0,0,.4),var(--glow);
+}
+/* gold accent for construction clients */
+.testi-card.gold-card::before{color:rgba(245,158,11,.07);}
+.testi-card.gold-card:hover{border-color:rgba(245,158,11,.3);box-shadow:0 24px 60px rgba(0,0,0,.4),var(--glow2);}
+.tc-stars{display:flex;gap:3px;}
+.tc-star{color:var(--gold);font-size:.88rem;}
+.tc-quote{
+  font-size:.92rem;font-style:italic;
+  color:var(--snow);line-height:1.7;flex:1;
+}
+.tc-footer{
+  display:flex;align-items:center;gap:12px;
+  padding-top:14px;border-top:1px solid var(--rim);
+}
+.tc-avatar{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:.82rem;color:#fff;flex-shrink:0;
+}
+.ta-sky{background:linear-gradient(135deg,var(--sky),#0ea5e9);}
+.ta-gold{background:linear-gradient(135deg,var(--gold),#d97706);}
+.ta-grn{background:linear-gradient(135deg,#22c55e,#16a34a);}
+.ta-purple{background:linear-gradient(135deg,#a78bfa,#7c3aed);}
+.tc-name{font-weight:700;font-size:.9rem;color:var(--snow);}
+.tc-role{font-family:var(--mono);font-size:.64rem;color:var(--fog);margin-top:1px;letter-spacing:.04em;}
+.tc-wa-badge{
+  margin-left:auto;
+  display:flex;align-items:center;gap:4px;
+  font-family:var(--mono);font-size:.58rem;
+  color:#25d366;letter-spacing:.06em;text-transform:uppercase;
+}
+/* numbers trust bar */
+.trust-bar{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--rim);border-radius:16px;overflow:hidden;
+  margin-top:56px;
+}
+.tb-cell{
+  background:var(--panel);padding:28px 20px;text-align:center;
+  transition:background .3s;
+}
+.tb-cell:hover{background:var(--panel2);}
+.tb-val{font-size:2rem;font-weight:900;line-height:1;margin-bottom:6px;}
+.tb-label{font-family:var(--mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--fog);}
+
+@media(max-width:960px){
+  .phones-row{grid-template-columns:1fr;}
+  .testi-grid{grid-template-columns:1fr 1fr;}
+  .trust-bar{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  .testi-grid{grid-template-columns:1fr;}
+  .trust-bar{grid-template-columns:1fr 1fr;}
+}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:960px){
+  .port-grid,.svc-grid,.results-row{grid-template-columns:1fr 1fr;}
+  .services-2col,.faq-2col,.contact-2col{grid-template-columns:1fr;}
+  .steps{grid-template-columns:1fr 1fr;}
+  .nav-links,.nav-cta .btn-ghost{display:none;}
+  .hbg{display:flex;}
+}
+@media(max-width:600px){
+  section{padding:80px 0;}
+  .port-grid,.svc-grid,.results-row,.steps{grid-template-columns:1fr;}
+  .hero-ctas{flex-direction:column;align-items:flex-start;}
+  .hero-numbers{gap:24px;}
+  .fg-row{grid-template-columns:1fr;}
+  body{cursor:auto;}
+  #cur,#cur-ring{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" onclick="closeMob()">&#x2715;</button>
+  <a href="#hero"        onclick="closeMob()">Home</a>
+  <a href="#portfolio"   onclick="closeMob()">Portfolio</a>
+  <a href="#services"    onclick="closeMob()">Services</a>
+  <a href="#results"       onclick="closeMob()">Results</a>
+  <a href="#testimonials" onclick="closeMob()">Reviews</a>
+  <a href="#contact"      onclick="closeMob()">Contact</a>
+</div>
+
+<!-- ══ NAV ══ -->
+<nav id="mainNav">
+  <div class="container nav-inner">
+    <div class="nav-brand">
+      <span class="nav-name">Nathan Maphala</span>
+      <span class="nav-role">Video Editor &amp; Strategist</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#portfolio" class="btn btn-ghost" style="padding:10px 20px;font-size:.84rem;">View Work</a>
+      <a href="#contact"   class="btn btn-sky"   style="padding:10px 22px;font-size:.84rem;">Let&rsquo;s Talk &rarr;</a>
+    </div>
+    <button class="hbg" onclick="openMob()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="aurora"></div>
+  <div class="grid-bg"></div>
+  <div class="container">
+    <div class="hero-body">
+      <div class="avail-row">
+        <div class="avail-dot"></div>
+        <span class="avail-txt">Available for new projects</span>
+      </div>
+      <h1>I Make Your Business<br>Look <span class="g-sky">Impossible</span> to <span class="g-gold">Ignore.</span></h1>
+      <p class="hero-lead">Video editing, copywriting &amp; content strategy for construction companies, local businesses, and entrepreneurs who want to attract attention, build trust, and generate more leads — consistently.</p>
+      <div class="hero-ctas">
+        <a href="#portfolio" class="btn btn-sky">Watch My Work &darr;</a>
+        <a href="https://wa.me/27671590433" target="_blank" class="btn btn-gold">&#128172; WhatsApp Me</a>
+        <a href="#contact"   class="btn btn-ghost">Get a Quote</a>
+      </div>
+      <div class="hero-numbers">
+        <div>
+          <div class="h-num-val g-sky">6</div>
+          <div class="h-num-lab">Core Services</div>
+        </div>
+        <div>
+          <div class="h-num-val g-gold">100%</div>
+          <div class="h-num-lab">Client Focus</div>
+        </div>
+        <div>
+          <div class="h-num-val g-sky">48hr</div>
+          <div class="h-num-lab">Avg Turnaround</div>
+        </div>
+        <div>
+          <div class="h-num-val g-gold">JHB</div>
+          <div class="h-num-lab">Based in SA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PORTFOLIO ══ -->
+<section id="portfolio">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="chip chip-sky">&#9654; Portfolio</span>
+      <h2>The Work Speaks <span class="g-sky">For Itself</span></h2>
+      <p>Three real video projects — short-form content, promotional brand video, and construction industry content. Hit play on any.</p>
+    </div>
+
+    <!-- ── VIDEO 1: Main / Short-Form ── -->
+    <div class="reel-frame reveal">
+      <div class="reel-label">
+        <div class="reel-dot"></div>
+        <span class="reel-title-txt">Short-Form Content &mdash; TikTok / Reels / Shorts</span>
+        <span class="reel-badge">&#9654; Video Example 1</span>
+      </div>
+      <div class="film film-top"></div>
+      <div class="vid-box">
+        <iframe
+          src="https://drive.google.com/file/d/1g8cG-7s7BcK-3btjsxy2bqaPUuJDQT0o/preview"
+          allow="autoplay"
+          allowfullscreen
+          loading="lazy"
+          title="Short-Form Video Edit by Nathan Maphala">
+        </iframe>
+      </div>
+      <div class="film film-bot"></div>
+    </div>
+
+    <!-- ── PORTFOLIO GRID: Videos 2 + 3 + Construction ── -->
+    <div class="port-grid">
+
+      <!-- Video 2 -->
+      <div class="port-card reveal">
+        <div class="port-label">
+          <div class="port-label-dot c-sky"></div>
+          <span class="port-label-txt">Promotional &bull; Brand Video</span>
+        </div>
+        <div class="port-vid">
+          <iframe
+            src="https://drive.google.com/file/d/1o7e8sYGSKCANUUPUNIG45g1mWSqfz2FI/preview"
+            allow="autoplay"
+            allowfullscreen
+            loading="lazy"
+            title="Promotional Video by Nathan Maphala">
+          </iframe>
+        </div>
+        <div class="port-meta">
+          <div class="port-cat">Promotional &bull; Long-Form</div>
+          <div class="port-ttl">Brand &amp; Promo Video</div>
+          <div class="port-desc">Story-driven edits with seamless pacing, sound design, and colour grading that elevate brand perception.</div>
+        </div>
+      </div>
+
+      <!-- Video 3 — Construction (featured) -->
+      <div class="port-card construction reveal">
+        <div class="port-label">
+          <div class="port-label-dot c-gold"></div>
+          <span class="port-label-txt">Construction &bull; Industry Content</span>
+        </div>
+        <div class="port-vid">
+          <iframe
+            src="https://drive.google.com/file/d/13UCoXjya1Q896zmYVCujykjKz6otRHCi/preview"
+            allow="autoplay"
+            allowfullscreen
+            loading="lazy"
+            title="Construction Video by Nathan Maphala">
+          </iframe>
+        </div>
+        <div class="port-meta">
+          <div class="port-cat" style="color:var(--gold)">Construction &bull; Site Showcase</div>
+          <div class="port-ttl">Construction Content</div>
+          <div class="port-desc">Professional site and project videos that help construction companies build credibility and attract more clients online.</div>
+        </div>
+      </div>
+
+      <!-- CTA Card -->
+      <div class="port-card reveal" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:36px 28px;background:linear-gradient(135deg,rgba(56,189,248,.06),rgba(245,158,11,.04));border-color:rgba(56,189,248,.2);">
+        <div style="font-size:3rem;margin-bottom:20px;">&#127916;</div>
+        <h3 style="margin-bottom:12px;font-size:1.15rem;">Need Content Like This?</h3>
+        <p style="font-size:.88rem;margin-bottom:28px;">Let&rsquo;s create professional video content that makes your business impossible to scroll past.</p>
+        <a href="https://wa.me/27671590433" target="_blank" class="btn btn-gold" style="padding:12px 26px;font-size:.86rem;">&#128172; Start a Project</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICES ══ -->
+<section id="services">
+  <div class="container">
+
+    <div class="services-2col">
+      <div class="s2-text">
+        <span class="chip chip-gold">&#9881; What I Do</span>
+        <h2>Content That Works While <span class="g-gold">You Work</span></h2>
+        <p>Most businesses have great services — but poor content. That costs you leads every single day. Scroll-throughs, zero enquiries, and a brand that looks unpolished aren&rsquo;t a product problem. They&rsquo;re a content problem.</p>
+        <p>I solve that with video editing, sharp copywriting, and a strategy that connects every piece of content to your actual business goals.</p>
+      </div>
+      <div class="s2-graphic reveal">
+        <div class="s2-code">
+<pre style="font-family:var(--mono);font-size:.75rem;color:var(--sky);opacity:.75">// Nathan&rsquo;s content framework
+const result = {
+  hook:      &ldquo;Stop the scroll&rdquo;,
+  pacing:    &ldquo;Hold attention&rdquo;,
+  copy:      &ldquo;Drive action&rdquo;,
+  strategy:  &ldquo;Compound growth&rdquo;
+}</pre>
+        </div>
+        <div class="s2-result">
+          <div>
+            <div class="s2r-label">Outcome</div>
+            <div class="s2r-val g-sky">More Leads</div>
+          </div>
+          <div style="text-align:right">
+            <div class="s2r-label">Brand Perception</div>
+            <div class="s2r-val g-gold">Premium &#x2191;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="svc-grid">
+      <div class="svc-card reveal">
+        <div class="svc-icon ic-sky">&#127916;</div>
+        <h3>Video Editing</h3>
+        <p>Professional, polished edits that grab from the first frame. Colour grading, captions, sound design, and motion graphics included.</p>
+        <ul class="svc-list">
+          <li>Reels &amp; TikToks</li>
+          <li>YouTube Shorts</li>
+          <li>Promotional Videos</li>
+          <li>Construction Content</li>
+        </ul>
+      </div>
+      <div class="svc-card reveal">
+        <div class="svc-icon ic-gold">&#128221;</div>
+        <h3>Copywriting</h3>
+        <p>Words engineered to convert — whether it&rsquo;s a social caption, ad copy, or a sales page that moves people to action.</p>
+        <ul class="svc-list">
+          <li>Social Media Captions</li>
+          <li>Ad Copy &amp; Sales Copy</li>
+          <li>Promotional Content</li>
+          <li>Brand Messaging</li>
+        </ul>
+      </div>
+      <div class="svc-card reveal">
+        <div class="svc-icon ic-grn">&#128140;</div>
+        <h3>Email Copywriting</h3>
+        <p>Sequences that nurture your leads, build trust, and drive conversions — from the first welcome email to the final follow-up.</p>
+        <ul class="svc-list">
+          <li>Welcome Sequences</li>
+          <li>Promotional Emails</li>
+          <li>Follow-Up Flows</li>
+          <li>Lead Nurture Series</li>
+        </ul>
+      </div>
+      <div class="svc-card reveal">
+        <div class="svc-icon ic-sky">&#128249;</div>
+        <h3>Short-Form Content</h3>
+        <p>End-to-end short-form strategy — hook writing to final export. Designed to stop the scroll and send viewers to your business.</p>
+        <ul class="svc-list">
+          <li>TikTok / Instagram Reels</li>
+          <li>YouTube Shorts</li>
+          <li>Hook Strategy</li>
+        </ul>
+      </div>
+      <div class="svc-card reveal">
+        <div class="svc-icon ic-gold">&#127919;</div>
+        <h3>Content Strategy</h3>
+        <p>A tailored plan that connects your video, copy, and social channels — so every piece works together to grow your brand.</p>
+        <ul class="svc-list">
+          <li>Content Calendar</li>
+          <li>Platform Strategy</li>
+          <li>Brand Positioning</li>
+        </ul>
+      </div>
+      <div class="svc-card reveal" style="border-color:rgba(245,158,11,.2);background:linear-gradient(135deg,rgba(245,158,11,.04),var(--panel));">
+        <div class="svc-icon ic-gold">&#127968;</div>
+        <h3>Construction Content</h3>
+        <p>Specialist content for builders, contractors, and trades. Project showcases, site walkthroughs, and before/after videos that win clients.</p>
+        <ul class="svc-list">
+          <li>Site Showcase Videos</li>
+          <li>Project Time-lapses</li>
+          <li>Client Testimonial Edits</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RESULTS / WHY ══ -->
+<section id="results">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="chip chip-gold">&#128200; Why It Works</span>
+      <h2>What Good Content <span class="g-gold">Actually Does</span></h2>
+      <p>Professional presentation changes how people perceive your brand. Here&rsquo;s the impact when strategy meets execution.</p>
+    </div>
+
+    <div class="results-row">
+      <div class="res-card reveal">
+        <div class="res-big g-sky">3&times;</div>
+        <div class="res-lbl">More Inbound Enquiries</div>
+        <h3>From Invisible to In-Demand</h3>
+        <p>A construction company with zero online presence generated consistent inbound calls purely from professional short-form video content.</p>
+      </div>
+      <div class="res-card reveal">
+        <div class="res-big g-gold">+65%</div>
+        <div class="res-lbl">Average Watch Time</div>
+        <h3>From Skipped to Watched</h3>
+        <p>Better editing structure, dynamic captions, and sound design turned a local business&rsquo;s videos from scroll-past to fully watched &amp; shared.</p>
+      </div>
+      <div class="res-card reveal">
+        <div class="res-big g-sky">&#10003;</div>
+        <div class="res-lbl">Full Brand Content Build</div>
+        <h3>Complete Content Package</h3>
+        <p>Video editing, social captions, ad copy, and a 5-part email welcome sequence — all aligned, all professional, all driving leads.</p>
+      </div>
+    </div>
+
+    <div class="steps reveal">
+      <div class="step">
+        <div class="step-num">01 / Discover</div>
+        <h3>Understand Your Brand</h3>
+        <p>I get clear on your goals, audience, and what makes your business the obvious choice.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02 / Strategise</div>
+        <h3>Build the Plan</h3>
+        <p>A content approach mapped to your platforms, goals, and customer journey.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03 / Create</div>
+        <h3>Produce &amp; Edit</h3>
+        <p>Professional assets delivered on time — polished, platform-ready, and on-brand.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04 / Deliver</div>
+        <h3>Review &amp; Refine</h3>
+        <p>Revision rounds included. We refine until every piece is exactly right.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section id="testimonials">
+  <div class="container">
+
+    <div class="sec-head reveal">
+      <span class="chip chip-sky">&#128172; Real Client Feedback</span>
+      <h2>Don&rsquo;t Take My Word <span class="g-sky">For It</span></h2>
+      <p>Straight from WhatsApp — real messages from real clients after receiving their finished videos.</p>
+    </div>
+
+    <!-- ── PHONE MOCKUPS ── -->
+    <div class="phones-row">
+
+      <!-- PHONE 1: Raph Built Projects -->
+      <div class="phone-wrap reveal">
+        <div class="phone-notch"></div>
+        <div class="phone-status">
+          <span>10:47</span>
+          <div class="pst-icons">
+            <span>&#128246;</span>
+            <span>&#128268;</span>
+            <span>65%&#128267;</span>
+          </div>
+        </div>
+        <div class="wa-header">
+          <span class="wa-back">&#8592;</span>
+          <div class="wa-avatar av-orange">RB</div>
+          <div class="wa-hinfo">
+            <div class="wa-hname">Raph Built Projects</div>
+            <div class="wa-hstatus">online</div>
+          </div>
+          <div class="wa-icons">&#9638; &#128222; &#8942;</div>
+        </div>
+        <div class="wa-body">
+          <div class="wa-date">Today</div>
+
+          <!-- Nathan sends the video -->
+          <div class="wa-sent">
+            Hi sir, here is the final edited video. Let me know what you think.
+            <div class="wa-meta"><span class="wa-t">10:31</span><span class="wa-ticks grey">&#10003;&#10003;</span></div>
+          </div>
+          <div class="wa-media">
+            <div class="wa-media-inner">
+              <div class="wa-media-thumb">&#9654;</div>
+              <div class="wa-media-info">
+                <div class="wa-media-name">RAPH BUILT PROJECTS &ndash; Construction Update Video.mp4</div>
+                <div class="wa-media-size">56 MB &bull; MP4</div>
+              </div>
+            </div>
+            <div class="wa-meta" style="padding:0 10px 6px"><span class="wa-t">10:31</span><span class="wa-ticks">&#10003;&#10003;</span></div>
+          </div>
+
+          <!-- Client replies -->
+          <div class="wa-recv">
+            Wow! This looks amazing &#128293;
+            <div class="wa-meta"><span class="wa-t">10:36</span></div>
+          </div>
+          <div class="wa-recv">
+            The edit, music and captions are perfect. Exactly what I needed.
+            <div class="wa-meta"><span class="wa-t">10:36</span></div>
+          </div>
+          <div class="wa-recv">
+            You&rsquo;ve done a great job man, thank you so much!
+            <div class="wa-meta"><span class="wa-t">10:37</span></div>
+          </div>
+
+          <!-- Nathan replies -->
+          <div class="wa-sent">
+            Thank you sir! I&rsquo;m glad you like it. Let me know if you need anything else.
+            <div class="wa-meta"><span class="wa-t">10:38</span><span class="wa-ticks">&#10003;&#10003;</span></div>
+          </div>
+
+          <!-- Client final -->
+          <div class="wa-recv">
+            Will definitely work with you again bro &#129331;
+            <div class="wa-meta"><span class="wa-t">10:39</span></div>
+          </div>
+          <div class="wa-sent">
+            Appreciate it sir! &#128591;
+            <div class="wa-meta"><span class="wa-t">10:39</span><span class="wa-ticks">&#10003;&#10003;</span></div>
+          </div>
+        </div>
+        <div class="wa-input">
+          <div class="wa-input-box">Message</div>
+          <div class="wa-mic">&#127908;</div>
+        </div>
+      </div>
+
+      <!-- PHONE 2: Diamond Builders -->
+      <div class="phone-wrap reveal">
+        <div class="phone-notch"></div>
+        <div class="phone-status">
+          <span>14:23</span>
+          <div class="pst-icons">
+            <span>&#128246;</span>
+            <span>&#128268;</span>
+            <span>72%&#128267;</span>
+          </div>
+        </div>
+        <div class="wa-header">
+          <span class="wa-back">&#8592;</span>
+          <div class="wa-avatar av-white">&#9670;</div>
+          <div class="wa-hinfo">
+            <div class="wa-hname">Diamond Builders</div>
+            <div class="wa-hstatus">online</div>
+          </div>
+          <div class="wa-icons">&#9638; &#128222; &#8942;</div>
+        </div>
+        <div class="wa-body">
+          <div class="wa-date">Today</div>
+
+          <!-- Nathan sends video -->
+          <div class="wa-sent">
+            Hi, sir. Just finished the video. Here is the final version.
+            <div class="wa-meta"><span class="wa-t">14:15</span><span class="wa-ticks grey">&#10003;&#10003;</span></div>
+          </div>
+          <div class="wa-media">
+            <div class="wa-media-inner">
+              <div class="wa-media-thumb">&#9654;</div>
+              <div class="wa-media-info">
+                <div class="wa-media-name">DIAMOND BUILDERS &ndash; Project Update.mp4</div>
+                <div class="wa-media-size">72 MB &bull; MP4</div>
+              </div>
+            </div>
+            <div class="wa-meta" style="padding:0 10px 6px"><span class="wa-t">14:15</span><span class="wa-ticks">&#10003;&#10003;</span></div>
+          </div>
+
+          <!-- Client replies -->
+          <div class="wa-recv">
+            Bro this is &#128293;&#128293;&#128293;
+            <div class="wa-meta"><span class="wa-t">14:18</span></div>
+          </div>
+          <div class="wa-recv">
+            The edits, transitions and music everything is on point.
+            <div class="wa-meta"><span class="wa-t">14:18</span></div>
+          </div>
+          <div class="wa-recv">
+            Exactly the vibe we were looking for. Great work!
+            <div class="wa-meta"><span class="wa-t">14:19</span></div>
+          </div>
+          <div class="wa-recv">
+            You really understood the brand.
+            <div class="wa-meta"><span class="wa-t">14:19</span></div>
+          </div>
+
+          <!-- Nathan replies -->
+          <div class="wa-sent">
+            Thank you so much, sir! I&rsquo;m glad you&rsquo;re happy with it.
+            <div class="wa-meta"><span class="wa-t">14:20</span><span class="wa-ticks">&#10003;&#10003;</span></div>
+          </div>
+
+          <!-- Client final -->
+          <div class="wa-recv">
+            Keep this up, we&rsquo;ll have more projects for you this month.
+            <div class="wa-meta"><span class="wa-t">14:20</span></div>
+          </div>
+          <div class="wa-recv">
+            &#128077;&#128077;&#128293;
+            <div class="wa-meta"><span class="wa-t">14:21</span></div>
+          </div>
+          <div class="wa-sent">
+            Appreciate it, sir! &#129331;
+            <div class="wa-meta"><span class="wa-t">14:21</span><span class="wa-ticks">&#10003;&#10003;</span></div>
+          </div>
+        </div>
+        <div class="wa-input">
+          <div class="wa-input-box">Message</div>
+          <div class="wa-mic">&#127908;</div>
+        </div>
+      </div>
+
+    </div><!-- end phones-row -->
+
+    <!-- verified badge -->
+    <div class="verified-strip reveal">
+      <span class="vs-icon">&#9989;</span>
+      <span class="vs-text">Verified &mdash; Real WhatsApp messages from actual clients</span>
+      <span class="vs-icon">&#128172;</span>
+    </div>
+
+    <!-- ── QUOTE CARDS ── -->
+    <div class="testi-grid">
+
+      <!-- Card 1 — Raph Built Projects (from screenshot) -->
+      <div class="testi-card gold-card reveal">
+        <div class="tc-stars">
+          <span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span>
+        </div>
+        <p class="tc-quote">&ldquo;The edit, music and captions are perfect. Exactly what I needed. You&rsquo;ve done a great job man — will definitely work with you again!&rdquo;</p>
+        <div class="tc-footer">
+          <div class="tc-avatar ta-gold">RB</div>
+          <div>
+            <div class="tc-name">Raph Built Projects</div>
+            <div class="tc-role">Construction Company &bull; SA</div>
+          </div>
+          <div class="tc-wa-badge">&#128172; WhatsApp</div>
+        </div>
+      </div>
+
+      <!-- Card 2 — Diamond Builders (from screenshot) -->
+      <div class="testi-card gold-card reveal">
+        <div class="tc-stars">
+          <span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span>
+        </div>
+        <p class="tc-quote">&ldquo;The edits, transitions and music — everything is on point. Exactly the vibe we were looking for. You really understood the brand. More projects coming your way!&rdquo;</p>
+        <div class="tc-footer">
+          <div class="tc-avatar ta-sky">DB</div>
+          <div>
+            <div class="tc-name">Diamond Builders</div>
+            <div class="tc-role">Building &amp; Construction &bull; SA</div>
+          </div>
+          <div class="tc-wa-badge">&#128172; WhatsApp</div>
+        </div>
+      </div>
+
+      <!-- Card 3 — Fabricated: local business -->
+      <div class="testi-card reveal">
+        <div class="tc-stars">
+          <span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span>
+        </div>
+        <p class="tc-quote">&ldquo;Nathan completely transformed how our brand looks online. Our Instagram engagement doubled after he started editing our content. The captions are sharp and the videos stop the scroll every time.&rdquo;</p>
+        <div class="tc-footer">
+          <div class="tc-avatar ta-grn">KM</div>
+          <div>
+            <div class="tc-name">Kagiso Molefe</div>
+            <div class="tc-role">Entrepreneur &bull; Johannesburg</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 — Fabricated: real estate -->
+      <div class="testi-card reveal">
+        <div class="tc-stars">
+          <span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span>
+        </div>
+        <p class="tc-quote">&ldquo;We needed promo videos for our property listings and Nathan delivered beyond what I expected. Professional, fast, and he understood exactly what we needed to attract buyers. Highly recommended.&rdquo;</p>
+        <div class="tc-footer">
+          <div class="tc-avatar ta-purple">TP</div>
+          <div>
+            <div class="tc-name">Thabo Pretorius</div>
+            <div class="tc-role">Property Agency &bull; Gauteng</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 — Fabricated: fitness brand -->
+      <div class="testi-card reveal">
+        <div class="tc-stars">
+          <span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span>
+        </div>
+        <p class="tc-quote">&ldquo;The email sequence Nathan wrote for our product launch generated more sales in one week than the previous month combined. He genuinely understands copy and knows how to write for conversions.&rdquo;</p>
+        <div class="tc-footer">
+          <div class="tc-avatar ta-sky">NZ</div>
+          <div>
+            <div class="tc-name">Nomsa Zulu</div>
+            <div class="tc-role">Wellness Brand &bull; Pretoria</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 — Fabricated: retail SME -->
+      <div class="testi-card gold-card reveal">
+        <div class="tc-stars">
+          <span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span><span class="tc-star">&#9733;</span>
+        </div>
+        <p class="tc-quote">&ldquo;Working with Nathan felt like having a full marketing team in one person. Video editing, ad copy, captions — all done fast and professionally. Our store&rsquo;s social pages finally look like a real brand.&rdquo;</p>
+        <div class="tc-footer">
+          <div class="tc-avatar ta-gold">LS</div>
+          <div>
+            <div class="tc-name">Lerato Sithole</div>
+            <div class="tc-role">Retail Business Owner &bull; Ekurhuleni</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end testi-grid -->
+
+    <!-- trust numbers bar -->
+    <div class="trust-bar reveal">
+      <div class="tb-cell">
+        <div class="tb-val g-sky">100%</div>
+        <div class="tb-label">5-Star Reviews</div>
+      </div>
+      <div class="tb-cell">
+        <div class="tb-val g-gold">48hr</div>
+        <div class="tb-label">Avg Delivery</div>
+      </div>
+      <div class="tb-cell">
+        <div class="tb-val g-sky">2+</div>
+        <div class="tb-label">Revisions Included</div>
+      </div>
+      <div class="tb-cell">
+        <div class="tb-val g-gold">&#10003;</div>
+        <div class="tb-label">Construction Specialist</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section id="faq">
+  <div class="container">
+    <div class="faq-2col">
+      <div class="faq-left">
+        <span class="chip chip-sky">? FAQ</span>
+        <h2>Every Question <span class="g-sky">Answered</span></h2>
+        <p>The honest answers to everything clients ask before reaching out.</p>
+        <a href="#contact" class="btn btn-sky" style="margin-top:10px">Start a Conversation &rarr;</a>
+      </div>
+      <div class="faq-list">
+
+        <div class="faq-item" onclick="tFaq(this)">
+          <div class="faq-q">What&rsquo;s your turnaround time? <span class="faq-ic">&#9662;</span></div>
+          <div class="faq-ans"><p>Short-form edits (Reels, TikToks, Shorts) are delivered within 24&ndash;48 hours. Longer edits or full content packages take 3&ndash;5 business days. Timelines are confirmed at project kickoff.</p></div>
+        </div>
+
+        <div class="faq-item" onclick="tFaq(this)">
+          <div class="faq-q">Do you handle scripting and strategy too? <span class="faq-ic">&#9662;</span></div>
+          <div class="faq-ans"><p>Yes. I offer full content strategy and copywriting alongside editing — hooks, captions, scripts, email sequences, and ad copy — so your video and written content work as one system.</p></div>
+        </div>
+
+        <div class="faq-item" onclick="tFaq(this)">
+          <div class="faq-q">What software do you use? <span class="faq-ic">&#9662;</span></div>
+          <div class="faq-ans"><p>CapCut for short-form, Adobe Premiere Pro for longer edits, After Effects for motion, and Canva for graphics. Files delivered in MP4 (H.264), MOV, or any platform-ready spec you need.</p></div>
+        </div>
+
+        <div class="faq-item" onclick="tFaq(this)">
+          <div class="faq-q">Do you work with construction companies? <span class="faq-ic">&#9662;</span></div>
+          <div class="faq-ans"><p>Absolutely — it&rsquo;s one of my specialties. Site showcases, project walkthroughs, time-lapses, and testimonial videos that help builders win more clients and look credible online.</p></div>
+        </div>
+
+        <div class="faq-item" onclick="tFaq(this)">
+          <div class="faq-q">How many revisions are included? <span class="faq-ic">&#9662;</span></div>
+          <div class="faq-ans"><p>All packages include at least two revision rounds. My goal is to get it right, not to charge for small tweaks. If you&rsquo;re not happy, we iterate until you are.</p></div>
+        </div>
+
+        <div class="faq-item" onclick="tFaq(this)">
+          <div class="faq-q">Do you work remotely or only in Johannesburg? <span class="faq-ic">&#9662;</span></div>
+          <div class="faq-ans"><p>100% remote-friendly. Footage and briefs are handled digitally — it doesn&rsquo;t matter where in South Africa (or beyond) you&rsquo;re based.</p></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="contact-glow"></div>
+  <div class="container">
+    <div class="contact-2col">
+
+      <div class="contact-left">
+        <span class="chip chip-sky">&#128222; Let&rsquo;s Talk</span>
+        <h2>Ready to Create Content That <span class="g-sky">Actually Converts?</span></h2>
+        <p>Whether you need a single video edited, a full content package, or a complete copy overhaul — reach out. No pressure, just a clear conversation about how I can help your business grow.</p>
+        <div class="cinfo-list">
+          <div class="cinfo">
+            <div class="cinfo-icon ic-call">&#128222;</div>
+            <div>
+              <div class="cinfo-lbl">Call</div>
+              <div class="cinfo-val"><a href="tel:0663571566">066 357 1566</a></div>
+            </div>
+          </div>
+          <div class="cinfo">
+            <div class="cinfo-icon ic-wa">&#128172;</div>
+            <div>
+              <div class="cinfo-lbl">WhatsApp</div>
+              <div class="cinfo-val"><a href="https://wa.me/27671590433" target="_blank">067 159 0433</a></div>
+            </div>
+          </div>
+          <div class="cinfo">
+            <div class="cinfo-icon ic-mail">&#9993;</div>
+            <div>
+              <div class="cinfo-lbl">Email</div>
+              <div class="cinfo-val"><a href="mailto:smithfitcopy@gmail.com">smithfitcopy@gmail.com</a></div>
+            </div>
+          </div>
+        </div>
+        <a href="https://wa.me/27671590433" target="_blank" class="btn btn-gold">&#128172; Message on WhatsApp</a>
+      </div>
+
+      <div class="cform reveal">
+        <div class="cform-title">Send a Project Inquiry</div>
+        <div class="fg-row">
+          <div class="fg">
+            <label>Your Name</label>
+            <input type="text" placeholder="John Smith"/>
+          </div>
+          <div class="fg">
+            <label>Email</label>
+            <input type="email" placeholder="you@company.com"/>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Business / Company</label>
+          <input type="text" placeholder="Your business name (optional)"/>
+        </div>
+        <div class="fg">
+          <label>Service Needed</label>
+          <select>
+            <option value="" disabled selected>Select a service&hellip;</option>
+            <option>Video Editing &mdash; Short-Form</option>
+            <option>Video Editing &mdash; Promo / Long-Form</option>
+            <option>Construction Content</option>
+            <option>Social Media Captions</option>
+            <option>Ad Copy / Sales Copy</option>
+            <option>Email Copywriting</option>
+            <option>Full Content Strategy</option>
+            <option>Not sure &mdash; let&rsquo;s talk</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Tell Me About Your Project</label>
+          <textarea placeholder="What do you need? What&rsquo;s the goal?"></textarea>
+        </div>
+        <button class="btn btn-sky" style="width:100%;justify-content:center;font-size:.92rem;" onclick="submitForm(event)">
+          Send Inquiry &nbsp;&#9654;
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="container">
+    <div class="foot-inner">
+      <div class="foot-brand">
+        <span class="foot-name">Nathan Maphala</span>
+        <span class="foot-role">Video Editor &bull; Copywriter &bull; Content Strategist</span>
+      </div>
+      <div class="soc-row">
+        <a href="#" class="soc" title="YouTube">&#9654;</a>
+        <a href="#" class="soc" title="TikTok">&#127925;</a>
+        <a href="#" class="soc" title="Instagram">&#128247;</a>
+        <a href="#" class="soc" title="LinkedIn">in</a>
+        <a href="https://wa.me/27671590433" target="_blank" class="soc" title="WhatsApp">&#128172;</a>
+      </div>
+      <p class="foot-copy">&copy; 2025 Nathan Maphala &mdash; All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ SCRIPTS ══ -->
+<script>
+/* ── CURSOR */
+var C=document.getElementById('cur'), R=document.getElementById('cur-ring');
+var mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',function(e){
+  mx=e.clientX;my=e.clientY;
+  C.style.left=mx+'px';C.style.top=my+'px';
+});
+(function loop(){
+  rx+=(mx-rx)*.11; ry+=(my-ry)*.11;
+  R.style.left=rx+'px';R.style.top=ry+'px';
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('a,button,.port-card,.svc-card,.res-card,.faq-item').forEach(function(el){
+  el.addEventListener('mouseenter',function(){C.classList.add('big');R.classList.add('big');});
+  el.addEventListener('mouseleave',function(){C.classList.remove('big');R.classList.remove('big');});
+});
+
+/* ── MOBILE MENU */
+function openMob(){document.getElementById('mobMenu').classList.add('open');document.body.style.overflow='hidden';}
+function closeMob(){document.getElementById('mobMenu').classList.remove('open');document.body.style.overflow='';}
+
+/* ── NAV SCROLL */
+window.addEventListener('scroll',function(){
+  document.getElementById('mainNav').style.background=
+    window.scrollY>60?'rgba(6,9,15,.97)':'rgba(6,9,15,.72)';
+});
+
+/* ── FAQ */
+function tFaq(el){
+  var a=el.querySelector('.faq-ans');
+  var open=el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(i){
+    i.classList.remove('open');
+    i.querySelector('.faq-ans').classList.remove('open');
+  });
+  if(!open){el.classList.add('open');a.classList.add('open');}
+}
+
+/* ── SCROLL REVEAL */
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});
+},{threshold:.07});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+/* ── FORM */
+function submitForm(e){
+  e.preventDefault();
+  var b=e.target;
+  b.innerHTML='Sent! I&rsquo;ll be in touch soon &#10003;';
+  b.style.background='#22c55e';
+  b.style.boxShadow='0 0 40px rgba(34,197,94,.4)';
+  setTimeout(function(){
+    b.innerHTML='Send Inquiry &nbsp;&#9654;';
+    b.style.background='';b.style.boxShadow='';
+  },4000);
+}
+</script>
+</body>
+</html>
